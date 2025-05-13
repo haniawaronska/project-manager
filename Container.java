@@ -75,6 +75,18 @@ private void calculatePredict() {
             this.delay = this.predict - deadline;
         }
     }
+public int progress() {
+    int total = 0;
+    int done = 0;
+    for (Task t : tasks) {
+        total += t.diffic;
+        if (t.status) {
+            done += t.diffic;
+        }
+    }
+    if (total == 0) return 0;
+    return (int) (100.0 * done / total);
+}
 
 
 };

@@ -1,13 +1,32 @@
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.List;
 
-public class Main {
+
+class Main {
     public static void main(String[] args) {
-        Container container = new Container();
+        SwingUtilities.invokeLater(() -> {
+            // Utworzenie kontenera i przykładowych projektów
+            Container container = new Container();
+            int startDay = (int) (System.currentTimeMillis() / (1000L * 60 * 60 * 24));
+            for (int i = 1; i <= 5; i++) {
+                int deadlineDay = startDay + 7;
+                Project p = new Project(
+                        "Projekt " + i,
+                        "Opis projektu nr " + i,
+                        startDay,
+                        deadlineDay
+                );
+                container.addProject(p);
+            }
 
-        Project p = new Project("Nowy projekt", "Opis", 19500, 19530);
-        container.addProject(p);
-
-        // uruchamiamy GUI
-        SwingUtilities.invokeLater(() -> new GUI(container));
+            // Utworzenie okna i dodanie DashboardView
+            JFrame frame = new JFrame("Project Manager");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(800, 600);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
