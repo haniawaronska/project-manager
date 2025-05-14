@@ -1,0 +1,23 @@
+<project name="SimpleJavaProject" default="run" basedir=".">
+
+    <!-- Czyszczenie plików .class -->
+    <target name="clean">
+        <delete>
+            <fileset dir="." includes="*.class"/>
+        </delete>
+    </target>
+
+    <!-- Kompilacja: javac *.java -->
+    <target name="compile">
+        <exec executable="sh">
+            <arg value="-c"/>
+            <arg value="javac *.java"/>
+        </exec>
+    </target>
+
+    <!-- Uruchamianie: java Main -->
+    <target name="run" depends="compile">
+        <java classname="Main" fork="true"/>
+    </target>
+
+</project>
